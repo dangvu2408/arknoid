@@ -1,0 +1,7 @@
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/shared/Utilities/kalman_filter.c:38:6:KalmanFilterInit	1
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/shared/Utilities/kalman_filter.c:45:7:KalmanFilter_updateEstimate	1
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/shared/Utilities/kalman_filter.c:55:6:KalmanFilter_setMeasurementError	1
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/shared/Utilities/kalman_filter.c:60:6:KalmanFilter_setEstimateError	1
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/shared/Utilities/kalman_filter.c:65:6:KalmanFilter_setProcessNoise	1
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/shared/Utilities/kalman_filter.c:70:7:KalmanFilter_getKalmanGain	1
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/shared/Utilities/kalman_filter.c:74:7:KalmanFilter_getEstimateError	1

@@ -1,0 +1,10 @@
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/light-sensor-library/LightDependentResistor.c:50:6:LDR_init	8
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/light-sensor-library/LightDependentResistor.c:94:6:LDR_setPhotocellPositionOnGround	1
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/light-sensor-library/LightDependentResistor.c:99:6:LDR_updatePhotocellParameters	1
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/light-sensor-library/LightDependentResistor.c:105:7:LDR_luxToFootCandles	1
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/light-sensor-library/LightDependentResistor.c:110:7:LDR_footCandlesToLux	1
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/light-sensor-library/LightDependentResistor.c:115:7:LDR_rawAnalogValueToLux	3
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/light-sensor-library/LightDependentResistor.c:137:7:LDR_getCurrentLux	1
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/light-sensor-library/LightDependentResistor.c:142:7:LDR_getCurrentFootCandles	1
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/light-sensor-library/LightDependentResistor.c:147:7:LDR_getSmoothedLux	5
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/light-sensor-library/LightDependentResistor.c:198:7:LDR_getSmoothedFootCandles	1

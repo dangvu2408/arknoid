@@ -23,6 +23,8 @@
 #include <ucglib.h>
 #include <button.h>
 #include <eventbutton.h>
+#include <stdio.h>
+
 
 #define ROWS 3
 #define COLS 3
@@ -46,9 +48,16 @@ int8_t ball_dy = -1;
 int8_t ball_r  = 2;
 
 int score;
+int old_score = -1;
 int boxes_left = 9;
 
+typedef enum {
+    GAME_RUNNING,
+    GAME_OVER,
+    GAME_PAUSED
+} GameState_t;
 
+GameState_t current_state = GAME_RUNNING;
 
 void gen9Box(ucg_t *ucg, ucg_int_t start_x, ucg_int_t start_y, ucg_int_t box_w, ucg_int_t box_h, ucg_int_t padding_x, ucg_int_t padding_y) {
 	for (int row = 0; row < ROWS; row++) {
@@ -81,6 +90,62 @@ void gen9Box(ucg_t *ucg, ucg_int_t start_x, ucg_int_t start_y, ucg_int_t box_w, 
 //	    if (box_x + 40 > 128) box_x = 88;
 //	}
 //}
+
+
+
+void startNewGame() {
+    score = 0;
+    boxes_left = 9;
+
+    ucg_ClearScreen(&ucg);
+
+    box_x = 44;
+
+    ball_x = 64;
+    ball_y = 110;
+    ball_dx = 1;
+    ball_dy = -1;
+
+    ucg_SetColor(&ucg, 0, 255, 255, 255);
+    ucg_SetFont(&ucg, ucg_font_helvR08_tf);
+    ucg_DrawString(&ucg, 0, 12, 0, "Score: 0");
+
+    for (int row = 0; row < ROWS; row++) {
+        for (int col = 0; col < COLS; col++) {
+            box_alive[row][col] = 1;
+        }
+    }
+
+    gen9Box(&ucg, 0, 15, 38, 8, 5, 5);
+    current_state = GAME_RUNNING;
+}
+
+void endGameOverDelay(void *pData) {
+    startNewGame();
+}
+
+void gameOver() {
+	current_state = GAME_OVER;
+	ucg_SetColor(&ucg, 0, 0, 0, 0);
+	ucg_DrawBox(&ucg, 0, 0, 128, 128);
+
+	ucg_SetColor(&ucg, 0, 255, 255, 255);
+	ucg_SetFont(&ucg, ucg_font_helvR10_tf);
+
+	char final_score[20];
+	sprintf(final_score, "SCORE: %d", score);
+	ucg_DrawString(&ucg, 0, 40, 0, "GAME OVER!!!");
+	ucg_DrawString(&ucg, 0, 80, 0, final_score);
+	TimerStart(
+	    "abc",
+	    5000,
+	    1,
+	    endGameOverDelay,
+	    NULL
+	);
+    // startNewGame();
+}
+
 
 void ballCollide() {
 	ucg_SetColor(&ucg, 0, 0, 0, 0);
@@ -121,7 +186,7 @@ void ballCollideBox() {
 	int padding_x = 5, padding_y = 5;
 
 	for (int row = 0; row < ROWS; row++) {
-		for (int col = 0; col < COLS; c++) {
+		for (int col = 0; col < COLS; col++) {
 
 			if (box_alive[row][col] == 0) continue;
 
@@ -138,6 +203,7 @@ void ballCollideBox() {
 				ucg_DrawBox(&ucg, x, y, box_w, box_h);
 
 				if (boxes_left == 0) {
+
 					gameOver();
 				}
 
@@ -148,50 +214,6 @@ void ballCollideBox() {
 
 }
 
-void gameOver() {
-    ucg_ClearScreen(&ucg);
-
-    ucg_SetColor(&ucg, 0, 255, 255, 255);
-    ucg_SetFont(&ucg, ucg_font_helvR12_tf);
-
-    char buff[20];
-    snprintf(buff, sizeof(buff), "SCORE: %d", score);
-
-    ucg_DrawString(&ucg, 20, 64, 0, buff);
-
-    TimerDelayMs(1500);
-
-    startNewGame();
-}
-
-void startNewGame() {
-    score = 0;
-    boxes_left = 9;
-
-    ucg_ClearScreen(&ucg);
-
-    box_x = 44;
-
-    ball_x = 64;
-    ball_y = 110;
-    ball_dx = 1;
-    ball_dy = -1;
-
-    ucg_SetColor(&ucg, 0, 255, 255, 255);
-    ucg_SetFont(&ucg, ucg_font_helvR08_tf);
-    ucg_DrawString(&ucg, 0, 12, 0, "Score: 0");
-
-    for (int r = 0; r < ROWS; r++) {
-        for (int c = 0; c < COLS; c++) {
-            box_alive[r][c] = 1;
-        }
-    }
-
-    gen9Box(&ucg, 0, 15, 38, 8, 5, 5);
-}
-
-
-
 int main(void)
 {
     SystemCoreClockUpdate();
@@ -199,17 +221,22 @@ int main(void)
     EventButton_Init();
     Button_Init();
 
-    score = 0;
     Ucglib4WireSWSPI_begin(&ucg, UCG_FONT_MODE_SOLID);
     ucg_ClearScreen(&ucg);
-
-    ucg_SetFont(&ucg, ucg_font_helvR08_tf);
     ucg_SetRotate180(&ucg);
 
-    ucg_SetColor(&ucg, 0, 255, 255, 255);
-    ucg_DrawString(&ucg, 0, 12, 0, "Score: 0");
+    startNewGame();
 
-    gen9Box(&ucg, 0, 15, 38, 8, 5, 5);
+//    score = 0;
+//
+//
+//    ucg_SetFont(&ucg, ucg_font_helvR08_tf);
+//
+//
+//    ucg_SetColor(&ucg, 0, 255, 255, 255);
+//    ucg_DrawString(&ucg, 0, 12, 0, "Score: 0");
+//
+//    gen9Box(&ucg, 0, 15, 38, 8, 5, 5);
 
 //    Button_SetMode(BUTTON_KIT_ID2, BUTTON_TYPE_LOGIC);
 //    Button_SetMode(BUTTON_KIT_ID4, BUTTON_TYPE_LOGIC);
@@ -218,42 +245,51 @@ int main(void)
 
     while(1)
     {
-    	if (Button_GetLogicInputPin(BUTTON_KIT_ID2) == 0) {
-    		if (key_2_released == 1) {
-    	        box_x -= 10;
-    		    if (box_x < 0) box_x = 0;
-    		    key_2_released = 0;
-    		}
-    	} else {
-            key_2_released = 1;
-        }
-
-    	if (Button_GetLogicInputPin(BUTTON_KIT_ID4) == 0) {
-    		if (key_4_released == 1) {
-    		    box_x += 10;
-    		    if (box_x + 40 > 128) box_x = 88;
-    		    key_4_released = 0;
-    		}
-    	} else {
-            key_4_released = 1;
-        }
-
-    	ucg_SetColor(&ucg, 0, 0, 0, 0);
-		ucg_DrawBox(&ucg, 0, 120, 128, 6);
-
-		ucg_SetColor(&ucg, 0, 255, 255, 255);
-		ucg_DrawBox(&ucg, box_x, 120, 40, 5);
-
-		ballCollide();
-		ballCollideBox();
-
-
-		char buff[20];
-		snprintf(buff, sizeof(buff), "Score: %d", score);
-
-		ucg_SetColor(&ucg, 0, 255, 255, 255);
-		ucg_DrawString(&ucg, 0, 12, 0, buff);
-
     	processTimerScheduler();
+
+    	if (current_state == GAME_RUNNING) {
+    		if (Button_GetLogicInputPin(BUTTON_KIT_ID2) == 0) {
+    		    if (key_2_released == 1) {
+    		    	box_x -= 10;
+    		    	if (box_x < 0) box_x = 0;
+    		    	key_2_released = 0;
+    		    }
+    		} else {
+    		    key_2_released = 1;
+    		}
+
+    		if (Button_GetLogicInputPin(BUTTON_KIT_ID4) == 0) {
+    		    if (key_4_released == 1) {
+    		    	box_x += 10;
+    		    	if (box_x + 40 > 128) box_x = 88;
+    		    	key_4_released = 0;
+    		    }
+    		} else {
+    		    key_4_released = 1;
+    		}
+
+			ucg_SetColor(&ucg, 0, 0, 0, 0);
+			ucg_DrawBox(&ucg, 0, 120, 128, 6);
+
+			ucg_SetColor(&ucg, 0, 255, 255, 255);
+			ucg_DrawBox(&ucg, box_x, 120, 40, 5);
+
+			ballCollide();
+			ballCollideBox();
+
+
+			if (score != old_score) {
+				ucg_SetColor(&ucg, 0, 0, 0, 0);
+				ucg_DrawBox(&ucg, 30, 0, 30, 15);
+
+				char buff[20];
+				snprintf(buff, sizeof(buff), "Score: %d", score);
+
+				ucg_SetColor(&ucg, 0, 255, 255, 255);
+				ucg_DrawString(&ucg, 0, 12, 0, buff);
+
+				old_score = score;
+			}
+    	}
     }
 }

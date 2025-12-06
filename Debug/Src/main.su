@@ -1,0 +1,7 @@
+../Src/main.c:62:6:gen9Box	56	static
+../Src/main.c:96:6:startNewGame	32	static
+../Src/main.c:123:6:endGameOverDelay	16	static
+../Src/main.c:127:6:gameOver	40	static
+../Src/main.c:150:6:ballCollide	16	static
+../Src/main.c:183:6:ballCollideBox	56	static
+../Src/main.c:217:5:main	40	static

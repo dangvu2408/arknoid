@@ -1,0 +1,7 @@
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/queue-test/queue.c:47:1:bufInit	1
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/queue-test/queue.c:66:1:bufNumItems	1
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/queue-test/queue.c:79:1:bufIsFull	1
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/queue-test/queue.c:92:1:bufIsEmpty	1
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/queue-test/queue.c:105:1:bufFlush	1
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/queue-test/queue.c:123:1:bufEnDat	3
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/queue-test/queue.c:154:1:bufDeDat	3
