@@ -4,7 +4,9 @@
  *  Created on: Dec 6, 2025
  *      Author: Dang Vu
  */
+// file function unknown
 
+#include "boardconfig.h"
 #include "drivers/timebase.h"
 #include <timer.h>
 
@@ -15,9 +17,9 @@ uint32_t Millis(void){
 }
 
 void Delay_ms(uint32_t d){
-	uint32_t t = millis();
+	uint32_t t = Millis();
 
-	while((uint32_t)(millis() - t) < d) {
+	while((uint32_t)(Millis() - t) < d) {
 		processTimerScheduler();
 	}
 }

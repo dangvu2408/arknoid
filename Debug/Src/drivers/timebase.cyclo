@@ -1,0 +1,5 @@
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/shared/Drivers/CMSIS/Include/core_cm4.h:1629:22:NVIC_SetPriority	2
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/shared/Drivers/CMSIS/Include/core_cm4.h:1760:26:SysTick_Config	2
+../Src/drivers/timebase.c:14:10:Millis	1
+../Src/drivers/timebase.c:18:6:Delay_ms	2
+../Src/drivers/timebase.c:26:6:Timebase_Init	1

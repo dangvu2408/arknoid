@@ -25,6 +25,8 @@
 #include <eventbutton.h>
 #include <stdio.h>
 
+#include "drivers/timebase.h"
+
 
 #define ROWS 3
 #define COLS 3
@@ -216,9 +218,7 @@ void ballCollideBox() {
 
 int main(void)
 {
-    SystemCoreClockUpdate();
-    TimerInit();
-    EventButton_Init();
+    Timebase_Init();
     Button_Init();
 
     Ucglib4WireSWSPI_begin(&ucg, UCG_FONT_MODE_SOLID);
