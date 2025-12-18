@@ -40,7 +40,7 @@
 #define SW5_PIN     GPIO_Pin_4
 
 #define SCR_W 128
-#define SCR_H 64
+#define SCR_H 128
 #define PLAY_X0 2
 #define PLAY_Y0 6
 #define PLAY_W (SCR_W - 4)
