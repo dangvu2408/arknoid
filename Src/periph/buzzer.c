@@ -22,6 +22,6 @@ void Buzzer_Init(void){
 
 void Buzzer_Beep(uint16_t ms){
   GPIO_SetBits(BUZZ_GPIOx, BUZZ_PIN);
-  delay_ms(ms);
+  Delay_ms(ms);
   GPIO_ResetBits(BUZZ_GPIOx, BUZZ_PIN);
 }

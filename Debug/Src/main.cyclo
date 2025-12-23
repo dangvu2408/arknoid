@@ -1,7 +1,1 @@
-../Src/main.c:64:6:gen9Box	4
-../Src/main.c:98:6:startNewGame	3
-../Src/main.c:125:6:endGameOverDelay	1
-../Src/main.c:129:6:gameOver	1
-../Src/main.c:152:6:ballCollide	7
-../Src/main.c:185:6:ballCollideBox	9
-../Src/main.c:219:5:main	9
+../Src/main.c:41:5:main	1

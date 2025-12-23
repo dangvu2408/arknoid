@@ -1,0 +1,5 @@
+../Src/graphic/render.c:13:6:clear_playfield	16	static
+../Src/graphic/render.c:19:6:draw_score_frame	40	static
+../Src/graphic/render.c:27:6:draw_ball	24	static
+../Src/graphic/render.c:32:6:draw_bar	24	static
+../Src/graphic/render.c:37:6:draw_boxes	32	static

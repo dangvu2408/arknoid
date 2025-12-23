@@ -5,12 +5,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Src/drivers/gpio.c \
 ../Src/drivers/timebase.c 
 
 OBJS += \
+./Src/drivers/gpio.o \
 ./Src/drivers/timebase.o 
 
 C_DEPS += \
+./Src/drivers/gpio.d \
 ./Src/drivers/timebase.d 
 
 
@@ -21,7 +24,7 @@ Src/drivers/%.o Src/drivers/%.su Src/drivers/%.cyclo: ../Src/drivers/%.c Src/dri
 clean: clean-Src-2f-drivers
 
 clean-Src-2f-drivers:
-	-$(RM) ./Src/drivers/timebase.cyclo ./Src/drivers/timebase.d ./Src/drivers/timebase.o ./Src/drivers/timebase.su
+	-$(RM) ./Src/drivers/gpio.cyclo ./Src/drivers/gpio.d ./Src/drivers/gpio.o ./Src/drivers/gpio.su ./Src/drivers/timebase.cyclo ./Src/drivers/timebase.d ./Src/drivers/timebase.o ./Src/drivers/timebase.su
 
 .PHONY: clean-Src-2f-drivers
 

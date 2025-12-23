@@ -23,273 +23,34 @@
 #include <ucglib.h>
 #include <button.h>
 #include <eventbutton.h>
+
 #include <stdio.h>
+#include <stdlib.h>
 
+#include "boardconfig.h"
+#include "drivers/gpio.h"
 #include "drivers/timebase.h"
+#include "periph/led.h"
+#include "periph/buzzer.h"
+#include "periph/button.h"
+#include "graphic/display_init.h"
+#include "game/menu_ui.h"
+#include "game/run_game.h"
 
-
-#define ROWS 3
-#define COLS 3
-
-static ucg_t ucg;
-
-uint8_t box_alive[ROWS][COLS];
-uint8_t box_r[ROWS][COLS];
-uint8_t box_g[ROWS][COLS];
-uint8_t box_b[ROWS][COLS];
-
-uint8_t key_2_released = 1;
-uint8_t key_4_released = 1;
-
-int16_t box_x = 44;
-
-int16_t ball_x = 64;
-int16_t ball_y = 110;
-int8_t ball_dx = 1;
-int8_t ball_dy = -1;
-int8_t ball_r  = 2;
-
-int score;
-int old_score = -1;
-int boxes_left = 9;
-
-typedef enum {
-    GAME_RUNNING,
-    GAME_OVER,
-    GAME_PAUSED
-} GameState_t;
-
-GameState_t current_state = GAME_RUNNING;
-
-void gen9Box(ucg_t *ucg, ucg_int_t start_x, ucg_int_t start_y, ucg_int_t box_w, ucg_int_t box_h, ucg_int_t padding_x, ucg_int_t padding_y) {
-	for (int row = 0; row < ROWS; row++) {
-	    for (int col = 0; col < COLS; col++) {
-	    	box_alive[row][col] = 1;
-	    	ucg_int_t x = start_x + col * (box_w + padding_x);
-	    	ucg_int_t y = start_y + row * (box_h + padding_y);
-
-	    	if (box_alive[row][col] == 1) {
-	    		ucg_int_t r = rand() % 256;
-	    		ucg_int_t g = rand() % 256;
-	    		ucg_int_t b = rand() % 256;
-	    		ucg_SetColor(ucg, 0, r, g, b);
-	    	    ucg_DrawBox(ucg, x, y, box_w, box_h);
-	    	} else {
-	    		ucg_SetColor(ucg, 0, 0, 0, 0);
-	    		ucg_DrawBox(ucg, x, y, box_w, box_h);
-	    	}
-	    }
-	}
-}
-
-//void moveBar() {
-//	if (Button_GetLogicInputPin(BUTTON_KIT_ID2) == 0) {
-//	    box_x -= 10;
-//	    if (box_x < 0) box_x = 0;
-//	}
-//	else if (Button_GetLogicInputPin(BUTTON_KIT_ID4) == 0) {
-//	    box_x += 10;
-//	    if (box_x + 40 > 128) box_x = 88;
-//	}
-//}
-
-
-
-void startNewGame() {
-    score = 0;
-    boxes_left = 9;
-
-    ucg_ClearScreen(&ucg);
-
-    box_x = 44;
-
-    ball_x = 64;
-    ball_y = 110;
-    ball_dx = 1;
-    ball_dy = -1;
-
-    ucg_SetColor(&ucg, 0, 255, 255, 255);
-    ucg_SetFont(&ucg, ucg_font_helvR08_tf);
-    ucg_DrawString(&ucg, 0, 12, 0, "Score: 0");
-
-    for (int row = 0; row < ROWS; row++) {
-        for (int col = 0; col < COLS; col++) {
-            box_alive[row][col] = 1;
-        }
-    }
-
-    gen9Box(&ucg, 0, 15, 38, 8, 5, 5);
-    current_state = GAME_RUNNING;
-}
-
-void endGameOverDelay(void *pData) {
-    startNewGame();
-}
-
-void gameOver() {
-	current_state = GAME_OVER;
-	ucg_SetColor(&ucg, 0, 0, 0, 0);
-	ucg_DrawBox(&ucg, 0, 0, 128, 128);
-
-	ucg_SetColor(&ucg, 0, 255, 255, 255);
-	ucg_SetFont(&ucg, ucg_font_helvR10_tf);
-
-	char final_score[20];
-	sprintf(final_score, "SCORE: %d", score);
-	ucg_DrawString(&ucg, 0, 40, 0, "GAME OVER!!!");
-	ucg_DrawString(&ucg, 0, 80, 0, final_score);
-	TimerStart(
-	    "abc",
-	    5000,
-	    1,
-	    endGameOverDelay,
-	    NULL
-	);
-    // startNewGame();
-}
-
-
-void ballCollide() {
-	ucg_SetColor(&ucg, 0, 0, 0, 0);
-	ucg_DrawDisc(&ucg, ball_x, ball_y, ball_r + 1, UCG_DRAW_ALL);
-
-	ball_x += ball_dx;
-	ball_y += ball_dy;
-
-	ucg_SetColor(&ucg, 0, 255, 255, 255);
-	ucg_DrawDisc(&ucg, ball_x, ball_y, ball_r, UCG_DRAW_ALL);
-
-	if (ball_x - ball_r <= 0) {
-		ball_x = ball_r;
-		ball_dx = -ball_dx;
-	} // ball touched the left wall
-	if (ball_x + ball_r >= 128) {
-		ball_x = 128 - ball_r;
-		ball_dx = -ball_dx;
-	} // ball touched the right wall
-
-	if (ball_y - ball_r <= 15) {
-		ball_y = ball_r + 15;
-		ball_dy = -ball_dy;
-	} // ball touched the top
-
-	if ((ball_y + ball_r >= 120) && (ball_x >= box_x) && (ball_x <= box_x + 40)) {
-		ball_y = 120 - ball_r;
-		ball_dy = -ball_dy;
-
-		// if (ball_x < box_x + 40/2) ball_dx = -1;
-		// else ball_dx = 1;
-	} // ball touched the bar
-}
-
-void ballCollideBox() {
-	int start_x = 0, start_y = 15;
-	int box_w = 38, box_h = 8;
-	int padding_x = 5, padding_y = 5;
-
-	for (int row = 0; row < ROWS; row++) {
-		for (int col = 0; col < COLS; col++) {
-
-			if (box_alive[row][col] == 0) continue;
-
-			int x = start_x + col * (box_w + padding_x);
-			int y = start_y + row * (box_h + padding_y);
-
-			if ((ball_x + ball_r > x) && (ball_x - ball_r < x + box_w) && (ball_y + ball_r > y) && (ball_y - ball_r < y + box_h)) {
-				box_alive[row][col] = 0;
-				score += 10;
-				boxes_left--;
-				ball_dy = -ball_dy;
-
-				ucg_SetColor(&ucg, 0, 0, 0, 0);
-				ucg_DrawBox(&ucg, x, y, box_w, box_h);
-
-				if (boxes_left == 0) {
-
-					gameOver();
-				}
-
-				return;
-			}
-		}
-	}
-
-}
 
 int main(void)
 {
     Timebase_Init();
+    GPIO_EnableAllClocks();
+
+    LED_Init();
+    Buzzer_Init();
     Button_Init();
-
-    Ucglib4WireSWSPI_begin(&ucg, UCG_FONT_MODE_SOLID);
-    ucg_ClearScreen(&ucg);
-    ucg_SetRotate180(&ucg);
-
-    startNewGame();
-
-//    score = 0;
-//
-//
-//    ucg_SetFont(&ucg, ucg_font_helvR08_tf);
-//
-//
-//    ucg_SetColor(&ucg, 0, 255, 255, 255);
-//    ucg_DrawString(&ucg, 0, 12, 0, "Score: 0");
-//
-//    gen9Box(&ucg, 0, 15, 38, 8, 5, 5);
-
-//    Button_SetMode(BUTTON_KIT_ID2, BUTTON_TYPE_LOGIC);
-//    Button_SetMode(BUTTON_KIT_ID4, BUTTON_TYPE_LOGIC);
-
-//    Button_RegisterEventCallback(BUTTON_EVENT_RELEASE, moveBar);
+    Display_Init();
 
     while(1)
     {
-    	processTimerScheduler();
-
-    	if (current_state == GAME_RUNNING) {
-    		if (Button_GetLogicInputPin(BUTTON_KIT_ID2) == 0) {
-    		    if (key_2_released == 1) {
-    		    	box_x -= 10;
-    		    	if (box_x < 0) box_x = 0;
-    		    	key_2_released = 0;
-    		    }
-    		} else {
-    		    key_2_released = 1;
-    		}
-
-    		if (Button_GetLogicInputPin(BUTTON_KIT_ID4) == 0) {
-    		    if (key_4_released == 1) {
-    		    	box_x += 10;
-    		    	if (box_x + 40 > 128) box_x = 88;
-    		    	key_4_released = 0;
-    		    }
-    		} else {
-    		    key_4_released = 1;
-    		}
-
-			ucg_SetColor(&ucg, 0, 0, 0, 0);
-			ucg_DrawBox(&ucg, 0, 120, 128, 6);
-
-			ucg_SetColor(&ucg, 0, 255, 255, 255);
-			ucg_DrawBox(&ucg, box_x, 120, 40, 5);
-
-			ballCollide();
-			ballCollideBox();
-
-
-			if (score != old_score) {
-				ucg_SetColor(&ucg, 0, 0, 0, 0);
-				ucg_DrawBox(&ucg, 30, 0, 30, 15);
-
-				char buff[20];
-				snprintf(buff, sizeof(buff), "Score: %d", score);
-
-				ucg_SetColor(&ucg, 0, 255, 255, 255);
-				ucg_DrawString(&ucg, 0, 12, 0, buff);
-
-				old_score = score;
-			}
-    	}
+    	UI_ShowMenu();
+    	run_game();
     }
 }

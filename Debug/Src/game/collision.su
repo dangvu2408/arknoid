@@ -1,0 +1,3 @@
+../Src/game/collision.c:11:9:ball_collide_wall	16	static
+../Src/game/collision.c:34:9:ball_collide_bar	16	static
+../Src/game/collision.c:47:9:ball_collide_boxes	32	static

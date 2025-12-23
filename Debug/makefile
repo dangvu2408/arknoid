@@ -13,6 +13,9 @@ RM := rm -rf
 -include lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/queue-test/subdir.mk
 -include lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/light-sensor-library/subdir.mk
 -include Startup/subdir.mk
+-include Src/periph/subdir.mk
+-include Src/graphic/subdir.mk
+-include Src/game/subdir.mk
 -include Src/drivers/subdir.mk
 -include Src/subdir.mk
 -include objects.mk

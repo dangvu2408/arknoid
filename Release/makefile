@@ -10,6 +10,10 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include Startup/subdir.mk
+-include Src/periph/subdir.mk
+-include Src/graphic/subdir.mk
+-include Src/game/subdir.mk
+-include Src/drivers/subdir.mk
 -include Src/subdir.mk
 -include objects.mk
 

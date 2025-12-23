@@ -8,8 +8,6 @@
 #ifndef PERIPH_BUTTON_H_
 #define PERIPH_BUTTON_H_
 
-#ifndef PERIPH_INPUT_H
-#define PERIPH_INPUT_H
 #include "boardconfig.h"
 #include <stdint.h>
 

@@ -1,0 +1,8 @@
+../Src/periph/button.c:12:23:pin_read_active	16	static
+../Src/periph/button.c:23:16:btn_clicked	24	static
+../Src/periph/button.c:33:6:Input_Init	16	static
+../Src/periph/button.c:59:9:SW1_Click	8	static
+../Src/periph/button.c:60:9:SW2_Click	8	static
+../Src/periph/button.c:61:9:SW3_Click	8	static
+../Src/periph/button.c:62:9:SW4_Click	8	static
+../Src/periph/button.c:63:9:SW5_Click	8	static

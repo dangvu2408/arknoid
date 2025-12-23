@@ -1,0 +1,3 @@
+../Src/game/collision.c:11:9:ball_collide_wall	5
+../Src/game/collision.c:34:9:ball_collide_bar	5
+../Src/game/collision.c:47:9:ball_collide_boxes	7

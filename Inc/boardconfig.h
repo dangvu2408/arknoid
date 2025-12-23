@@ -46,6 +46,22 @@
 #define PLAY_W (SCR_W - 4)
 #define PLAY_H (SCR_H - 10)
 
+/* ===== ARKANOID CONFIG ===== */
+
+#define BOX_ROWS   3
+#define BOX_COLS   3
+#define BOX_W      38
+#define BOX_H      8
+#define BOX_PAD_X  2
+#define BOX_PAD_Y  2
+
+#define BAR_W      45
+#define BAR_H      5
+#define BAR_Y      120
+
+#define BALL_R     3
+
+
 extern ucg_t ucg;
 
 #endif /* BOARDCONFIG_H_ */

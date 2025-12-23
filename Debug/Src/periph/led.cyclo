@@ -1,0 +1,4 @@
+../Inc/periph/led.h:13:20:LED_On	1
+../Inc/periph/led.h:14:20:LED_Off	1
+../Src/periph/led.c:12:6:LED_Init	1
+../Src/periph/led.c:22:6:LED_Blink	2

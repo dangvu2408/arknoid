@@ -23,7 +23,10 @@ C_DEPS :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 Src/drivers \
+Src/game \
+Src/graphic \
 Src \
+Src/periph \
 Startup \
 lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/light-sensor-library \
 lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/docs/queue-test \
