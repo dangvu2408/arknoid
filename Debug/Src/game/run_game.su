@@ -1,2 +1,2 @@
-../Src/game/run_game.c:19:13:game_over_blink	16	static
-../Src/game/run_game.c:23:6:run_game	64	static
+../Src/game/run_game.c:25:13:game_over_blink	16	static
+../Src/game/run_game.c:29:6:run_game	96	static

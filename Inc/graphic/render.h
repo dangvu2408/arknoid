@@ -12,7 +12,8 @@
 #include "game/entities.h"
 
 void clear_playfield(void);
-void draw_score_frame(uint16_t score);
+void draw_score_frame(int score);
+void clear_ball(Ball *b);
 void draw_ball(Ball *b);
 void draw_bar(Bar *bar);
 void draw_boxes(Box *boxes, uint8_t count);

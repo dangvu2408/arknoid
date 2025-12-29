@@ -37,20 +37,40 @@
 #include "game/menu_ui.h"
 #include "game/run_game.h"
 
+typedef enum {
+    STATE_MENU,
+    STATE_GAME
+} GameState;
 
-int main(void)
-{
-    Timebase_Init();
+
+int main(void) {
+	SystemCoreClockUpdate();
+	TimerInit();
     GPIO_EnableAllClocks();
-
     LED_Init();
     Buzzer_Init();
     Button_Init();
     Display_Init();
 
-    while(1)
-    {
-    	UI_ShowMenu();
-    	run_game();
+    GameState state = STATE_MENU;
+
+    ucg_ClearScreen(&ucg);
+
+    while(1) {
+        switch(state) {
+            case STATE_MENU:
+            	ucg_SetColor(&ucg, 0, 0, 0, 0);
+            	ucg_DrawBox(&ucg, 0, 0, SCR_W, SCR_H);
+                UI_ShowMenu();
+                state = STATE_GAME;
+                break;
+
+            case STATE_GAME:
+                run_game();
+                ucg_SetColor(&ucg, 0, 0, 0, 0);
+                ucg_DrawBox(&ucg, 0, 0, SCR_W, SCR_H);
+                state = STATE_MENU;
+                break;
+        }
     }
 }

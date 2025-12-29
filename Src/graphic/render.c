@@ -11,18 +11,19 @@
 #include <stdio.h>
 
 void clear_playfield(void){
-	ucg_SetColor(&ucg, 0, 0,0,0);
-	ucg_DrawBox(&ucg, 1, 1, SCR_W-3, SCR_H-3);
-	ucg_SetColor(&ucg, 0, 255, 255, 255);
+	ucg_ClearScreen(&ucg);
 }
 
-void draw_score_frame(uint16_t score){
+void draw_score_frame(int score){
 	ucg_SetColor(&ucg, 0, 255, 255, 255);
-	ucg_DrawFrame(&ucg, 0, 0, SCR_W-1, SCR_H-1);
-	char buf[10];
-	snprintf(buf,sizeof(buf),"%u",score);
-	ucg_DrawString(&ucg, 2, 10, 0, buf);
+	ucg_DrawFrame(&ucg, 0, 0, SCR_W-1, 15);
 }
+
+void clear_ball(Ball *b){
+    ucg_SetColor(&ucg, 0, 0, 0, 0);
+    ucg_DrawDisc(&ucg, b->x, b->y, b->r + 1, UCG_DRAW_ALL);
+}
+
 
 void draw_ball(Ball *b){
     ucg_SetColor(&ucg, 0, 255, 255, 255);
@@ -30,6 +31,9 @@ void draw_ball(Ball *b){
 }
 
 void draw_bar(Bar *bar){
+	ucg_SetColor(&ucg, 0, 0, 0, 0);
+	ucg_DrawBox(&ucg, 0, 120, 128, 6);
+
     ucg_SetColor(&ucg, 0, 255, 255, 255);
     ucg_DrawBox(&ucg, bar->x, bar->y, bar->w, bar->h);
 }

@@ -1,5 +1,6 @@
 ../Src/graphic/render.c:13:6:clear_playfield	1
-../Src/graphic/render.c:19:6:draw_score_frame	1
-../Src/graphic/render.c:27:6:draw_ball	1
-../Src/graphic/render.c:32:6:draw_bar	1
-../Src/graphic/render.c:37:6:draw_boxes	3
+../Src/graphic/render.c:17:6:draw_score_frame	1
+../Src/graphic/render.c:22:6:clear_ball	1
+../Src/graphic/render.c:28:6:draw_ball	1
+../Src/graphic/render.c:33:6:draw_bar	1
+../Src/graphic/render.c:41:6:draw_boxes	3

@@ -25,7 +25,7 @@ uint8_t ball_collide_wall(Ball *b) {
     }
 
     if (b->y + b->r >= PLAY_Y0 + PLAY_H) {
-        return 1;   // game over
+        return 1;
     }
 
     return 0;
@@ -44,10 +44,8 @@ uint8_t ball_collide_bar(Ball *b, Bar *bar) {
     return 0;
 }
 
-uint8_t ball_collide_boxes(Ball *b, Box *boxes, uint8_t count)
-{
-    for(uint8_t i = 0; i < count; i++)
-    {
+uint8_t ball_collide_boxes(Ball *b, Box *boxes, uint8_t count) {
+    for(uint8_t i = 0; i < count; i++) {
         if(!boxes[i].alive) continue;
 
         uint8_t row = i / BOX_COLS;
@@ -56,16 +54,17 @@ uint8_t ball_collide_boxes(Ball *b, Box *boxes, uint8_t count)
         int16_t x = PLAY_X0 + col * (BOX_W + 2);
         int16_t y = PLAY_Y0 + row * (BOX_H + 2);
 
+
+
         if (b->x + b->r > x &&
             b->x - b->r < x + BOX_W &&
             b->y + b->r > y &&
-            b->y - b->r < y + BOX_H)
-        {
+            b->y - b->r < y + BOX_H) {
             boxes[i].alive = 0;
             b->vy = -b->vy;
-            return 1;   // chỉ báo "có va chạm"
+            return i;
         }
     }
-    return 0;
+    return -1;
 }
 

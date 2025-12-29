@@ -42,16 +42,16 @@
 #define SCR_W 128
 #define SCR_H 128
 #define PLAY_X0 2
-#define PLAY_Y0 6
+#define PLAY_Y0 18
 #define PLAY_W (SCR_W - 4)
-#define PLAY_H (SCR_H - 10)
+#define PLAY_H (SCR_H - 18)
 
 /* ===== ARKANOID CONFIG ===== */
 
 #define BOX_ROWS   3
 #define BOX_COLS   3
-#define BOX_W      38
-#define BOX_H      8
+#define BOX_W      40
+#define BOX_H      7
 #define BOX_PAD_X  2
 #define BOX_PAD_Y  2
 

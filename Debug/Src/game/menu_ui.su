@@ -1,1 +1,2 @@
-../Src/game/menu_ui.c:19:6:UI_ShowMenu	24	static
+../Src/game/menu_ui.c:25:13:draw_item	48	static
+../Src/game/menu_ui.c:36:6:UI_ShowMenu	48	static

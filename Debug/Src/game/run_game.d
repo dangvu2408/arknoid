@@ -13,8 +13,9 @@ Src/game/run_game.o: ../Src/game/run_game.c ../Inc/game/run_game.h \
  D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/shared/Middle/ucglib/ucg.h \
  D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/shared/Middle/rtos/timer.h \
  ../Inc/drivers/timebase.h ../Inc/periph/led.h ../Inc/periph/button.h \
- ../Inc/graphic/render.h ../Inc/game/entities.h ../Inc/game/levels.h \
- ../Inc/game/collision.h
+ ../Inc/periph/buzzer.h ../Inc/graphic/render.h ../Inc/game/entities.h \
+ ../Inc/game/levels.h ../Inc/game/collision.h \
+ D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/shared/Middle/button/button.h
 ../Inc/game/run_game.h:
 ../Inc/boardconfig.h:
 D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/shared/Drivers/CMSIS/Include/stm32f401re.h:
@@ -32,7 +33,9 @@ D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-non
 ../Inc/drivers/timebase.h:
 ../Inc/periph/led.h:
 ../Inc/periph/button.h:
+../Inc/periph/buzzer.h:
 ../Inc/graphic/render.h:
 ../Inc/game/entities.h:
 ../Inc/game/levels.h:
 ../Inc/game/collision.h:
+D:/STM32CubePrj/lib_sdk_1.0.3_nucleo_f401re/embedded-stm32-course-main/stm32-nonos-stdperiph-sdk/shared/Middle/button/button.h:
